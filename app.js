@@ -8,7 +8,7 @@ import { Orden } from './models/Orden.js';
 import { Producto } from './models/Producto.js';
 import { Tipo_Cliente } from './models/Tipo_Cliente.js';
 import { Usuario } from './models/Usuario.js';
-import { setupRelationships } from './models/setupRelationships.js';
+import { relaciones } from './models/relaciones.js';
 
 import routerAuth from './modules/auth/authRoutes.js';
 import routerOrden from './modules/orden/ordenRoutes.js';
@@ -28,7 +28,7 @@ app.use('/orden', routerOrden);
 app.use('/tipo', routerTipo);
 app.use('/usuarios', routerUser);
 
-setupRelationships();
+relaciones();
 
 async function verificarConexion(){
     try{
