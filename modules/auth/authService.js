@@ -10,9 +10,9 @@ const authService = {
   comparePassword: async (inputPassword, storedPassword) => {
     return bcrypt.compare(inputPassword, storedPassword);
   },
-  generateToken: (user) => {
+  generateToken: (Usuario) => {
     return jwt.sign(
-      { id: user.id, nombre: user.nombre, correo: user.correo },
+      { id: Usuario.id, nombre: Usuario.nombre, correo: Usuario.correo },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );

@@ -15,7 +15,7 @@ export const registerUser = async (req, res) => {
     const newUser = await Usuario.create({
       nombre,
       correo,
-      contraseña,
+      contraseña: hashedPassword,
       telefono,
       admi: false, 
     });
@@ -28,7 +28,8 @@ export const registerUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    res.status(500).json({ error: "Error al registrar el usuario." });
+    console.error('Error al registrar el usuario:', error);
+    res.status(500).json({ error: "Error al registrar el usuario."});
   }
 };
 
@@ -46,7 +47,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Contraseña incorrecta." });
     }
 
-    /*const token = authService.generateToken(user);*/
+    const token = authService.generateToken(user);
 
     res.status(200).json({
       message: "Inicio de sesión exitoso.",
