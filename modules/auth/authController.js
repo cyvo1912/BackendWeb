@@ -48,6 +48,7 @@ export const loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
+    console.error('Error al iniciar sesion:', error);
     res.status(500).json({ error: "Error al iniciar sesión." });
   }
 };
