@@ -46,7 +46,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Contraseña incorrecta." });
     }
 
-    const token = authService.generateToken(user);
+    /*const token = authService.generateToken(user);*/
 
     res.status(200).json({
       message: "Inicio de sesión exitoso.",
