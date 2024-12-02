@@ -2,7 +2,7 @@
 
 const authService = {
   comparePassword: async (inputPassword, storedPassword) => {
-    return compare(inputPassword, storedPassword);
+    return inputPassword === storedPassword;
   },
 };
 
