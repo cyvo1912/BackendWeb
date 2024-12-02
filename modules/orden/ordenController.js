@@ -5,9 +5,9 @@ import { Producto } from '../../models/Producto.js';
 
 const createOrder = async (req, res, next) => {
   try {
-    const { id_usuario, productos, direccion, fecha, metodo_pago, nroTarjeta } = req.body;
+    const { id_usuario, productos, direccion, fecha, metodo_pago, tarjeta } = req.body;
 
-    const newOrder = await Orden.create({ id_usuario, productos, direccion, fecha, metodo_pago, nroTarjeta });
+    const newOrder = await Orden.create({ id_usuario, productos, direccion, fecha, metodo_pago, tarjeta });
 
     if (productos && productos.length > 0) {
 
