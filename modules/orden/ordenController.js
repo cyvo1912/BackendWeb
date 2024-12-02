@@ -5,9 +5,9 @@ import { Producto } from '../../models/Producto.js';
 
 const createOrder = async (req, res, next) => {
   try {
-    const { usuario_id, productos, total, direccion, metodoPago, nroTarjeta } = req.body;
+    const { id_usuario, productos, direccion, fecha, metodo_pago, nroTarjeta } = req.body;
 
-    const newOrder = await Orden.create({ usuario_id, total, direccion, metodoPago, nroTarjeta });
+    const newOrder = await Orden.create({ id_usuario, productos, direccion, fecha, metodo_pago, nroTarjeta });
 
     if (productos && productos.length > 0) {
 
@@ -37,6 +37,7 @@ const createOrder = async (req, res, next) => {
 
     res.status(201).json({ message: 'Orden creada y stock actualizado', order: newOrder });
   } catch (error) {
+    console.error('Error al crear orden:', error);
     next(error);
   }
 };
