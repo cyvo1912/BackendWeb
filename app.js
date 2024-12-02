@@ -30,6 +30,15 @@ app.use('/usuarios', routerUser);
 
 relaciones();
 
+async function verificarConexion(){
+    try{
+        await sequelize.authenticate();
+        console.log("Conexion a BD exitosa")
+        await sequelize.sync();
+    }catch (error){
+        console.error("Ocurrio un error con la conexion a la BD", error)
+    }
+}
 
 app.listen(port, () => {
     console.log("Servidor esta activo en puerto " + port);
