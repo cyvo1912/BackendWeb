@@ -10,22 +10,17 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ error: "El correo ya está registrado." });
     }
 
-    const hashedPassword = await authService.hashPassword(contraseña);
-
     const newUser = await Usuario.create({
       nombre,
       correo,
-      contraseña: hashedPassword,
+      contraseña,
       telefono,
       admi: false, 
     });
 
-    const token = authService.generateToken(newUser);
-
     res.status(201).json({
       message: "Usuario registrado exitosamente.",
-      Usuario: { id: newUser.id, nombre: newUser.nombre, correo: newUser.correo },
-      token,
+      Usuario: { id: newUser.id, nombre: newUser.nombre, correo: newUser.correo, telefono: newUser.telefono },
     });
   } catch (error) {
     console.error('Error al registrar el usuario:', error);
@@ -46,8 +41,6 @@ export const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(400).json({ error: "Contraseña incorrecta." });
     }
-
-    const token = authService.generateToken(user);
 
     res.status(200).json({
       message: "Inicio de sesión exitoso.",
