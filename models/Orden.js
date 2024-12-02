@@ -15,7 +15,7 @@ export const Orden = sequelize.define(
             type: DataTypes.STRING
         },
         tarjeta: {
-            type: DataTypes.INTEGER
+            type: DataTypes.STRING
         },
         metodo_pago: {
             type: DataTypes.STRING
