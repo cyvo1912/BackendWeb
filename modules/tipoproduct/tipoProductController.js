@@ -12,7 +12,7 @@ export const getAllTypes = async (req, res, next) => {
 
 export const getProductsByCategory = async (req, res, next) => {
   try {
-    const { categoriaId } = req.params;
+    const categoriaId = parseInt(req.params.categoriaId, 10);
 
     // Verifica si la categoría existe
     const categoria = await Categoria.findByPk(categoriaId);
@@ -22,14 +22,15 @@ export const getProductsByCategory = async (req, res, next) => {
 
     // Busca los productos que pertenecen a esa categoría
     const productos = await Producto.findAll({
-      where: { categoriaId },
+      where: { categoria_id: categoriaId },
     });
 
     res.status(200).json({
-      categoria: categoria.nombre,
+      categoria: categoria.nombre_categoria, // Ajusta según el nombre de tu columna
       productos,
     });
   } catch (error) {
-    next(error);
+    console.error('Error en getProductsByCategory:', error);
+    next(error); // Envía el error al middleware de manejo de errores
   }
 };
